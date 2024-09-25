@@ -1,7 +1,16 @@
 import express from "express";
 import md5 from "md5";
 import { PrismaClient } from "@prisma/client";
-import { CreateEventPayload } from "./types";
+
+import { EventType } from "@prisma/client";
+
+export type CreateEventPayload = {
+  emitter: {
+    name: string;
+  };
+  payload: EventType;
+  at: string;
+};
 
 const prisma = new PrismaClient();
 
@@ -54,3 +63,5 @@ app.post("/api/event", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+export default app;
