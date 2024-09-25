@@ -16,8 +16,7 @@ datasource db {
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   hash      String   @unique
-  firstName String
-  lastName  String
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   events    Event[]
