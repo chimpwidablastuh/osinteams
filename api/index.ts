@@ -20,9 +20,14 @@ app.use(express.json());
 
 const PORT = 3000;
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   // Put get data in here
-  res.send("Hello Osinteams :-)");
+  res.send(`Hello Osinteams :-). To start spying your mates, send requests to POST /api/event with the following payload \`emitter: {
+    name: string;
+  };
+  payload: EventType; // "AVAILABLE" | "DO_NOT_DISTURB" | "AWAY" | "BUSY" | "IN_A_MEETING" | "PRESENTING" | "OFFLINE"
+  at: string;
+  }\`. Then you can watch the results on dashboard/:user_hash`);
 });
 
 // Handler de publication d'un event
