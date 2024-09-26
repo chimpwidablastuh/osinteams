@@ -15,16 +15,32 @@ function logStatusChange(contactName, status) {
   // do a json POST
 
   // Envoie d'une requete
-  fetch("https://osinteams.onrender.com/api/event", {
-    method: "POST", // Méthode HTTP
-    headers: {
-      "Content-Type": "application/json",
+  saveToSauron({
+    emitter: {
+      name: contactName,
     },
-    body: JSON.stringify({
-      emitter: contactName,
-      status: getStatusTag(status),
-    }),
+    payload: status,
   });
+}
+
+function saveToSauron(data) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify(data);
+
+  const requestOptions = {
+    mode: "no-cors",
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("https://osinteams.onrender.com/api/event", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
 }
 
 function extractContactNameFromImageUrl(imageUrl) {
