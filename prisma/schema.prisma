@@ -39,4 +39,5 @@ enum EventType {
   IN_A_MEETING
   PRESENTING
   OFFLINE
+  UNKNOWN
 }

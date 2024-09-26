@@ -12,11 +12,19 @@ function logStatusChange(contactName, status) {
   console.log(message, nameStyle, statusStyle);
 
   let log = `${formattedDate} ${formattedTime} - ${contactName} est maintenant ${status}`;
-  // chrome.storage.local.get({ logs: [] }, function(result) {
-  //     let logs = result.logs;
-  //     logs.push(log);
-  //     chrome.storage.local.set({ logs: logs });
-  // });
+  // do a json POST
+
+  // Envoie d'une requete
+  fetch("http://localhost:3000/api/event", {
+    method: "POST", // Méthode HTTP
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      emitter: contactName,
+      status: getStatusTag(status),
+    }),
+  });
 }
 
 function extractContactNameFromImageUrl(imageUrl) {
@@ -27,14 +35,37 @@ function extractContactNameFromImageUrl(imageUrl) {
   return "Inconnu";
 }
 
+function getStatusTag(status) {
+  switch (status) {
+    case "Out of office":
+      return "OFFLINE";
+    case "Prensenting":
+      return "PRESENTING";
+    case "Do not disturb":
+      return "DO_NOT_DISTURB";
+    case "In a meeting":
+      return "IN_A_MEETING";
+    case "Busy":
+      return "BUSY";
+    case "Away":
+      return "AWAY";
+    case "Available":
+      return "AVAILABLE";
+    default:
+      return "UNKNOWN";
+  }
+}
+
 function getStatusColor(status) {
   switch (status) {
-    case "Occupé(e)":
+    case "In a meeting":
     case "En communication":
       return "red";
     case "Absent":
+    case "Away":
       return "yellow";
     case "Disponible":
+    case "Available":
       return "green";
     default:
       return "gray";
