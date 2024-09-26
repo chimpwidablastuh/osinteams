@@ -15,7 +15,7 @@ function logStatusChange(contactName, status) {
   // do a json POST
 
   // Envoie d'une requete
-  fetch("http://localhost:3000/api/event", {
+  fetch("https://osinteams.onrender.com/api/event", {
     method: "POST", // Méthode HTTP
     headers: {
       "Content-Type": "application/json",

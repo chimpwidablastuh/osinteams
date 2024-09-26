@@ -32,12 +32,12 @@ model Event {
 }
 
 enum EventType {
-  AVAILABLE
-  DO_NOT_DISTURB
-  AWAY
-  BUSY
-  IN_A_MEETING
-  PRESENTING
-  OFFLINE
+  AVAILABLE // ok
+  DO_NOT_DISTURB // ok
+  AWAY // ok
+  BUSY // ok
+  IN_A_MEETING // ok
+  PRESENTING // ok
+  OFFLINE // ok
   UNKNOWN
 }
